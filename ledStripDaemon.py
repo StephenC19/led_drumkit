@@ -2,8 +2,9 @@ from ledStrip import *
 from config import *
 from animations import *
 
-with open('accentColors.json', 'w') as outfile:
-    colors = json.load(json_file)
+# with open('./accentColors.json') as json_file:
+#     print(json_file.read)
+#     colors = json.load(json_file)
 
 def getStartEnd(note):
     drum_name = MIDI_NOTE_INDEX[note]
@@ -34,6 +35,15 @@ def ledStripDaemon(queue):
                 hit_color = colors["pad_color"]
             elif j["type"] == "cymbal":
                 hit_color = colors["cymbal_color"]
+
+            # Modify Brightness
+            if int(j["velocity"]) > 80:
+                mul = 1
+            elif int(j["velocity"]) > 20:
+                mul = j["velocity"]/80.0
+            else:
+                mul = 0.2
+            hit_color = [int(hit_color[0]*mul), int(hit_color[1]*mul),int(hit_color[2]*mul)]
 
 
             for k in range(end-start):

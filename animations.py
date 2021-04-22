@@ -1,25 +1,28 @@
-def linearFade(r, g, b):
-    r = r - 10 if r > 10 else 0
-    g = g - 10 if g > 10 else 0
-    b = b - 10 if b > 10 else 0
+def linearFade(r, g, b, amount=5):
+    mul = amount*2
+    r = r - mul if r > 10 else 0
+    g = g - mul if g > 10 else 0
+    b = b - mul if b > 10 else 0
 
     return [r,g,b]
 
 
 def logFade(r,g,b, power):
-    if r > 10:
-        r = ((r/260)**power) * r
+    if r > 5:
+        mul = (r/260.0)**power
+        r = int(mul * r)
     else:
         r = 0
-    if g > 10:
-        g = ((g/260)**power) * g
+    if g > 5:
+        mul = (g/260.0)**power
+        g = int(mul * g)
     else:
         g = 0
-    if b > 10:
-        b = ((b/260)**power) * b
+    if b > 5:
+        mul = (b/260.0)**power
+        b = int(mul * b)
     else:
         b = 0
-
     return [r,g,b]
 
 

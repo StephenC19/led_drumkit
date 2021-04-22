@@ -23,15 +23,15 @@ def listen_to_midi_notes():
         if msg.type == "note_on":
             if msg.note in PADS_NOTES:
                 print(msg)
-                queue.put({"note":msg.note, "type":"pad"})
+                queue.put({"note":msg.note, "velocity":msg.velocity , "type":"pad"})
 
             elif msg.note in CYMBAL_NOTES:
-                queue.put({"note":msg.note, "type":"cymbal"})
+                queue.put({"note":msg.note, "velocity":msg.velocity , "type":"cymbal"})
 
             elif msg.note == KICK_NOTE:
-                queue.put({"note":msg.note, "type":"kick"})
+                queue.put({"note":msg.note, "velocity":msg.velocity , "type":"kick"})
 
 
-if name == "__main__":
+if __name__ == "__main__":
     # Start reading MIDI messages
     listen_to_midi_notes()
