@@ -1,6 +1,6 @@
 from ledStrip import *
 from config import *
-from animations import *
+from hitAnimations import *
 
 # with open('./accentColors.json') as json_file:
 #     print(json_file.read)
