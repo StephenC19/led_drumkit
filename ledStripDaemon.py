@@ -1,6 +1,8 @@
 from ledStrip import *
 from config import *
 from hitAnimations import *
+from ac import *
+import time
 
 # with open('./accentColors.json') as json_file:
 #     print(json_file.read)
@@ -22,6 +24,13 @@ def ledStripDaemon(queue):
     while True:
         try:
             j = queue.get_nowait()
+
+            if j["animation"]:
+                for i in range(0, 100):
+                    u = 100 - i
+                    l.setSegment([u,u,u], 0, LED_COUNT)
+                continue
+
             if j["type"] == "accent":
                 start,end = 0, LED_COUNT
                 hit_color = colors["accent_hit_1_color"]
@@ -58,6 +67,7 @@ def ledStripDaemon(queue):
                 led_values[i] = linearFade(r, g, b)
             l.stripShow()
         except:
+            print("Unexpected error:", sys.exc_info()[0])
             for i in range(len(led_values)):
                 r = led_values[i][0]
                 g = led_values[i][1]

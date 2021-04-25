@@ -3,16 +3,24 @@ from main import *
 from kitAnimations import *
 from flask import Flask
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy dog'
+app.config['CORS_HEADERS'] = 'Content-Type'
 
-
-# LED drums process
-p = multiprocessing.Process(target=listen_to_midi_notes())
+cors = CORS(app, resources={r"/start_app": {"origins": "http://localhost:port"}})
 
 @app.route('/start_app')
-def hello_world():
-    powerUp()
-    p.start()
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def start_app():
+    with open('control_file.txt', 'w') as f:
+        f.write('start')
     return 'Hello, World!'
+
+
+@app.route('/stop_app')
+def stop_app():
+    with open('control_file.txt', 'w') as f:
+        f.write('stop')
+    return "Powered off"
 
 # @app.route('/change_accent_color')
 # def change_accent_color():
@@ -28,12 +36,15 @@ def hello_world():
 
 #     return "Successfully changed to the new color"
 
-@app.route('/stop_app')
-def power_down():
-    # Stop the main thread and gpio cleanup
-    # Run power down animation
-    p.stop()
-    return "Powered off"
+# @app.route('/change_accent_color')
+# def change_accent_color():
+
+@app.route('/add_animation')
+def add_animation():
+    animation = int(request.args.get('animation'))
+    with open('control_file.txt', 'w') as f:
+        f.write("animation\n" + animation)
+    return "Rainbow animation"
 
 if __name__ == "__main__":
     app.run()
