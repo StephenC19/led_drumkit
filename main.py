@@ -20,9 +20,9 @@ def listen_to_midi_notes():
         print("No MIDI device found. Please make sure a device is connected.")
         exit(1)
 
-    # Start LED control daemon
+    # Start LED control daemon with animation
     queue = multiprocessing.Queue()
-    queue.put({"animation":True})
+    queue.put({"animation":True, "animation_type": 'startup'})
 
     ld = multiprocessing.Process(target=ledStripDaemon, args=(queue,))
     ld.start()
@@ -33,8 +33,11 @@ def listen_to_midi_notes():
             # TODO: This is terrible. Just don't even read this block
             with open('control_file.txt') as f:
                 if f.readline().rstrip() == "animation":
-                    queue.put({"animation":True})
+                    animation_type = f.readline().rstrip()
+                    queue.put({"animation":True, "animaton_type": animation_type})
                     continue
+                elif f.readline().rstrip() == "stop":
+                    exit(1)
             # Did you actually read it? Don't judge me
 
             if msg.note in PADS_NOTES:

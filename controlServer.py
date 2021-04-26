@@ -2,6 +2,9 @@ import multiprocessing
 from main import *
 from kitAnimations import *
 from flask import Flask
+from flask import request
+from flask_cors import CORS, cross_origin
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy dog'
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -15,36 +18,32 @@ def start_app():
         f.write('start')
     return 'Hello, World!'
 
-
 @app.route('/stop_app')
 def stop_app():
     with open('control_file.txt', 'w') as f:
         f.write('stop')
     return "Powered off"
 
-# @app.route('/change_accent_color')
-# def change_accent_color():
-#     color_type = int(request.args.get('color_type'))
-#     red = int(request.args.get('red'))
-#     green = int(request.args.get('green'))
-#     blue = int(request.args.get('blue'))
+@app.route('/change_color')
+def change_color():
+    color_type = request.args.get('color_type')
+    red = int(request.args.get('red'))
+    green = int(request.args.get('green'))
+    blue = int(request.args.get('blue'))
 
-#     with open('accentColors.json', 'w') as outfile:
-#         data = json.load(json_file)
-#         data[color_type] = [red, green, blue]
-#         json.dump(data, outfile)
-
-#     return "Successfully changed to the new color"
-
-# @app.route('/change_accent_color')
-# def change_accent_color():
+    with open('accentColors.json') as json_file:
+        data = json.load(json_file)
+        data[color_type] = [red, green, blue]
+    with open('accentColors.json', 'w') as outfile:
+        json.dump(data, outfile)
+    return "Successfully changed to the new color"
 
 @app.route('/add_animation')
 def add_animation():
-    animation = int(request.args.get('animation'))
+    animation = request.args.get('animation')
     with open('control_file.txt', 'w') as f:
         f.write("animation\n" + animation)
     return "Rainbow animation"
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')

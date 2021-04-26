@@ -1,12 +1,12 @@
 from ledStrip import *
 from config import *
 from hitAnimations import *
-from ac import *
 import time
+import json
 
-# with open('./accentColors.json') as json_file:
-#     print(json_file.read)
-#     colors = json.load(json_file)
+# Load color palette
+with open('accentColors.json') as json_file:
+    colors = json.load(json_file)
 
 def getStartEnd(note):
     drum_name = MIDI_NOTE_INDEX[note]
@@ -26,24 +26,30 @@ def ledStripDaemon(queue):
             j = queue.get_nowait()
 
             if j["animation"]:
-                for i in range(0, 100):
-                    u = 100 - i
-                    l.setSegment([u,u,u], 0, LED_COUNT)
+                if j["animation_type"] == 'startup':
+                    for i in range(0, 250, 10):
+                        u = 250 - i
+                        l.setSegment([u,0,0], 0, LED_COUNT)
+                elif j["animation_type"] == 'rainbow':
+                    l.rainbow(20,1)
+                    l.setSegment([0,0,0], 0, LED_COUNT)
                 continue
 
             if j["type"] == "accent":
                 start,end = 0, LED_COUNT
-                hit_color = colors["accent_hit_1_color"]
+                hit_color = colors["accent_hit_1"]
             else:
                 start, end = getStartEnd(j["note"])
 
             # Set Color
             if j["type"] == "kick":
-                hit_color = colors["kick_color"]
+                hit_color = colors["kick"]
+            elif j["type"] == "snare":
+                hit_color = colors["pad"]
             elif j["type"] == "pad":
-                hit_color = colors["pad_color"]
+                hit_color = colors["pad"]
             elif j["type"] == "cymbal":
-                hit_color = colors["cymbal_color"]
+                hit_color = colors["cymbal"]
 
             # Modify Brightness
             if int(j["velocity"]) > 80:
