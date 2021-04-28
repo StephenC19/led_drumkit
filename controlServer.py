@@ -19,12 +19,14 @@ def start_app():
     return 'Hello, World!'
 
 @app.route('/stop_app')
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def stop_app():
     with open('control_file.txt', 'w') as f:
         f.write('stop')
     return "Powered off"
 
 @app.route('/change_color')
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def change_color():
     color_type = request.args.get('color_type')
     red = int(request.args.get('red'))
@@ -35,10 +37,11 @@ def change_color():
         data = json.load(json_file)
         data[color_type] = [red, green, blue]
     with open('accentColors.json', 'w') as outfile:
-        json.dump(data, outfile)
+        json.dump(data, outfile, indent = 4)
     return "Successfully changed to the new color"
 
 @app.route('/add_animation')
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def add_animation():
     animation = request.args.get('animation')
     with open('control_file.txt', 'w') as f:

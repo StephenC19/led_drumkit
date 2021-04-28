@@ -161,7 +161,3 @@ class LedStrip:
 
     def stripShow(self):
         self.strip.show()
-
-    def setPixel(self, pixel, color):
-        c = Color(color[0], color[1], color[2])
-        self.strip.setPixelColor(pixel, c)

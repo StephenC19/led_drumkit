@@ -11,7 +11,7 @@ import { serverUrl } from './vars.js'
 
 export default {
   name: 'ColorSquare',
-  props: ['color_val', 'red', 'green', 'blue'],
+  props: ['color_val', 'type', 'red', 'green', 'blue'],
   methods: {
       toggleShow() {
           this.show = !this.show

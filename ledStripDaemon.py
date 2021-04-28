@@ -3,10 +3,8 @@ from config import *
 from hitAnimations import *
 import time
 import json
+from pixelMap import *
 
-# Load color palette
-with open('accentColors.json') as json_file:
-    colors = json.load(json_file)
 
 def getStartEnd(note):
     drum_name = MIDI_NOTE_INDEX[note]
@@ -22,17 +20,42 @@ def ledStripDaemon(queue):
         led_values[i] = [0,0,0]
 
     while True:
+
         try:
             j = queue.get_nowait()
 
             if j["animation"]:
                 if j["animation_type"] == 'startup':
-                    for i in range(0, 250, 10):
-                        u = 250 - i
+                    # Horizontal wipe
+                    g = len(pixel_map)
+                    for y in range(0, g/2):
+                        numbers = pixel_map[(g/2) + y] + pixel_map[(g/2) - y]
+                        for j in numbers:
+                            l.setPixel(j, [255, 255, 255])
+                        l.stripShow()
+                        for k in range(600):
+                            l.setPixel(k, [0,0,0])
+                    l.stripShow()
+                    for y in range(1, g/2):
+                        r = (g/2) - y
+                        numbers = pixel_map[(g/2) + r] + pixel_map[(g/2) - r]
+                        for j in numbers:
+                            l.setPixel(j, [255, 255, 255])
+                        l.stripShow()
+                        for k in range(600):
+                            l.setPixel(k, [0,0,0])
+                        l.stripShow()
+                    for t in range(0, 250, 10):
+                        u = 250 - t
                         l.setSegment([u,0,0], 0, LED_COUNT)
+
+                    # Load color palette
+                    with open('accentColors.json') as json_file:
+                        colors = json.load(json_file)
+
                 elif j["animation_type"] == 'rainbow':
                     l.rainbow(20,1)
-                    l.setSegment([0,0,0], 0, LED_COUNT)
+                    l.setSegment([u,0,0], 0, LED_COUNT)
                 continue
 
             if j["type"] == "accent":
@@ -73,7 +96,6 @@ def ledStripDaemon(queue):
                 led_values[i] = linearFade(r, g, b)
             l.stripShow()
         except:
-            print("Unexpected error:", sys.exc_info()[0])
             for i in range(len(led_values)):
                 r = led_values[i][0]
                 g = led_values[i][1]
