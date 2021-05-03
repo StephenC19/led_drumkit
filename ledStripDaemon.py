@@ -68,11 +68,15 @@ def ledStripDaemon(queue):
             if j["type"] == "kick":
                 hit_color = colors["kick"]
             elif j["type"] == "snare":
-                hit_color = colors["pad"]
+                hit_color = colors["snare"]
             elif j["type"] == "pad":
                 hit_color = colors["pad"]
             elif j["type"] == "cymbal":
                 hit_color = colors["cymbal"]
+            elif j["type"] == "accent_1":
+                hit_color = colors["accent_hit_1"]
+            elif j["type"] == "accent_2":
+                hit_color = colors["accent_hit_2"]
 
             # Modify Brightness
             if int(j["velocity"]) > 80:

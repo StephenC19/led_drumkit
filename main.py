@@ -40,15 +40,24 @@ def listen_to_midi_notes():
                     exit(1)
             # Did you actually read it? Don't judge me
 
-            if msg.note in PADS_NOTES:
-                print(msg)
+            if msg.note == SNARE_NOTE:
+                queue.put({"note":msg.note, "velocity":msg.velocity , "type":"snare", "animation":False})
+
+            elif msg.note == KICK_NOTE:
+                queue.put({"note":msg.note, "velocity":msg.velocity , "type":"kick", "animation":False})
+
+            elif msg.note in PADS_NOTES:
                 queue.put({"note":msg.note, "velocity":msg.velocity , "type":"pad", "animation":False})
 
             elif msg.note in CYMBAL_NOTES:
                 queue.put({"note":msg.note, "velocity":msg.velocity , "type":"cymbal", "animation":False})
 
-            elif msg.note == KICK_NOTE:
-                queue.put({"note":msg.note, "velocity":msg.velocity , "type":"kick", "animation":False})
+            elif msg.note == ACCENT_NOTE_1:
+                queue.put({"note":msg.note, "velocity":msg.velocity , "type":"accent_1", "animation":False})
+
+            elif msg.note == ACCENT_NOTE_2:
+                queue.put({"note":msg.note, "velocity":msg.velocity , "type":"accent_2", "animation":False})
+
 
 
 if __name__ == "__main__":
