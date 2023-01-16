@@ -1,3 +1,5 @@
+import json
+
 def hex_rgb_converter(hex_value):
     value = hex_value.lstrip('#')
     lv = len(hex_value)
@@ -13,3 +15,11 @@ def convert_brightness(brightness, red_value, green_value, blue_value):
     green = int(green_value*factor)
     blue = int(blue_value*factor)
     return red, green, blue
+
+def read_json_file(file):
+    with open('config/accentColors.json') as json_file:
+        return json.load(json_file)
+
+def read_file(file):
+    with open('config/accentColors.json') as json_file:
+        return json_file

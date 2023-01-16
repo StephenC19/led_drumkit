@@ -16,10 +16,10 @@ class LedStrip:
     ########## Utils ##########
     ###########################
 
-    def __init__(self, led_count):
+    def __init__(self, led_count, pin):
         self.color = "#FF9300"
         self.LED_COUNT = led_count
-        LED_PIN = STRIP_GPIO_PIN
+        LED_PIN = pin
         LED_FREQ_HZ = 800000
         LED_DMA = 10
         LED_BRIGHTNESS = 255

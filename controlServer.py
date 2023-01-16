@@ -1,6 +1,6 @@
 import multiprocessing
 from main import *
-from kitAnimations import *
+from animations.kitAnimations import *
 from flask import Flask
 from flask import request
 from flask_cors import CORS, cross_origin
@@ -33,10 +33,10 @@ def change_color():
     green = int(request.args.get('green'))
     blue = int(request.args.get('blue'))
 
-    with open('accentColors.json') as json_file:
+    with open('config/accentColors.json') as json_file:
         data = json.load(json_file)
         data[color_type] = [red, green, blue]
-    with open('accentColors.json', 'w') as outfile:
+    with open('config/accentColors.json', 'w') as outfile:
         json.dump(data, outfile, indent = 4)
     return "Successfully changed to the new color"
 
