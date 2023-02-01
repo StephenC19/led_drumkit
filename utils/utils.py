@@ -17,9 +17,13 @@ def convert_brightness(brightness, red_value, green_value, blue_value):
     return red, green, blue
 
 def read_json_file(file):
-    with open('config/accentColors.json') as json_file:
+    with open(file) as json_file:
         return json.load(json_file)
 
+def write_json_file(file, data):
+    with open(file, 'w') as outfile:
+        json.dump(data, outfile, indent = 4)
+
 def read_file(file):
-    with open('config/accentColors.json') as json_file:
+    with open(file) as json_file:
         return json_file

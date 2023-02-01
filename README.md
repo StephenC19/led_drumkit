@@ -18,9 +18,10 @@ Turn your drumkit into a light show! By mounting an led strip to your drums you 
 ## Installation
 
 ### LED setup
+
 Using the steps listed here you can setup you Raspberry pi to control an LED strip. These steps are based off the info [here](https://tutorials-raspberrypi.com/connect-control-raspberry-pi-ws2812-rgb-led-strips/)
 
-1. Install packages on the Raspberry Pi. `pip install requirements.txt`
+1. Install packages on the Raspberry Pi. `pip install requirements.txt`, `sudo pip install rpi_ws281x`
 2. Connect the Power supply to the strip and link to the Pi
     - Connect the data line (green) to pin 18 in case
     - Connect the ground (black) to pin 6 or any available ground pin.
@@ -50,4 +51,43 @@ with mido.open_input('<midi_device_name>') as inport:
 6. Start the control server `python controlServer.py`
 7. Open the http://<ip>:8080/ and enjoy!
 
-Built by Stephen Colfer
+### Pi Setup
+1. Make sure it's up to date
+`sudo apt-get update`
+2. Install required packages
+`sudo apt-get install gcc make build-essential python-dev git scons swig`
+3. Deactive the audio output
+sudo echo "blacklist snd_bcm2835" > /etc/modprobe.d/snd-blacklist.conf
+4.
+5. Restart
+`sudo reboot`
+6. Download the LED control library
+`git clone https://github.com/jgarff/rpi_ws281x`
+7. Compile the libraries
+`cd rpi_ws281x/;sudo scons`
+8. Setup python libraries
+```
+cd python
+sudo python3 setup.py build
+sudo python3 setup.py install
+sudo pip3 install adafruit-circuitpython-neopixel
+```
+9. Setup test script
+`sudo nano examples/strandtest.py`
+Then modifiy the constants in the class like the LED_PIN and LED_COUNT
+10. Run the code
+`sudo python3 examples/strandtest.py`
+
+
+### Drum Installation
+
+This will vary depending on the drumkit. Most led strips come with small clips that can be stuck or screwed into the drum.
+This can be avoided by using some for of tape or even covering part of the drum wall with tape and then using a glue gun
+to gule the strip to the part of the drum with tape. This makes it easy to take the strip off the drums if needed with no
+damage.
+
+The strip will also need to be cut and either clipped together using something like this TODO or soldering together for
+better secure line connections.
+
+
+### Server Start

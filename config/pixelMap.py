@@ -1,4 +1,4 @@
-from ledStrip import *
+from lib.ledStrip import *
 import time
 
 pixel_map = {
@@ -44,34 +44,3 @@ pixel_map = {
     40:[588, 589, 590, 591, 592],
     41:[593, 594, 595, 596]
 }
-
-
-# l = LedStrip(600)
-
-# # color = [20,0,0]
-
-# # for i in pixel_map:
-# #     for j in pixel_map[i]:
-# #         print("j is ", j)
-# #         l.setPixel(j, color)
-# #     l.stripShow()
-# #     #time.sleep(0.05)
-# #     for k in range(600):
-# #         l.setPixel(k, [0,0,0])
-
-# # l.stripShow()
-
-
-# g = len(pixel_map)
-# for i in range(0, g/2):
-#     numbers = pixel_map[(g/2) + i] + pixel_map[(g/2) + i]
-
-#     for j in numbers:
-#         print("j is ", j)
-#         l.setPixel(j, color)
-#     l.stripShow()
-#     #time.sleep(0.05)
-#     # for k in range(600):
-#     #     l.setPixel(k, [0,0,0])
-
-# l.stripShow()

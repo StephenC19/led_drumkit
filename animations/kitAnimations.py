@@ -1,7 +1,7 @@
-from ledStrip import *
-from config import *
+from lib.ledStrip import *
+from config.config import *
 
 def powerUp():
-    l = LedStrip(LED_COUNT)
+    lStrip= LedStrip(LED_COUNT)
 
-    l.rainbow(20,100)
+    lStrip.rainbow(20,100)
