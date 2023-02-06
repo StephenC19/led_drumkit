@@ -7,7 +7,7 @@ Turn your drumkit into a light show! By mounting an led strip to your drums you 
 
 ## Materials
 - Raspberry Pi
-- [WS2812 RGB LED Strip](https://www.amazon.co.uk/CHINLY-WS2812B-Individually-Addressable-Waterproof/dp/B01LSF4Q0A?pd_rd_w=Y8qio&pf_rd_p=907ba819-1a37-4335-8b84-d82a78945ade&pf_rd_r=XJJKR5NCNPWB7S3EAEC3&pd_rd_r=6c6d6a0f-9829-4747-8fee-2d0778cb1b8d&pd_rd_wg=QvtLt&pd_rd_i=B01LSF4Q0A&psc=1&ref_=pd_bap_d_rp_2_t) (or similar strip with indivually addresable LEDs)
+- [WS2812 RGB LED Strip](https://www.amazon.co.uk/CHINLY-WS2812B-Individually-Addressable-Waterproof/dp/B01LSF4Q0A?pd_rd_w=Y8qio&pf_rd_p=907ba819-1a37-4335-8b84-d82a78945ade&pf_rd_r=XJJKR5NCNPWB7S3EAEC3&pd_rd_r=6c6d6a0f-9829-4747-8fee-2d0778cb1b8d&pd_rd_wg=QvtLt&pd_rd_i=B01LSF4Q0A&psc=1&ref_=pd_bap_d_rp_2_t) (or similar strip with individually addresable LEDs)
 - [Power supply suitedable](https://www.amazon.co.uk/gp/product/B07C4SNYCH/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1) for the LED strip. 10A per 300 5v leds in this case.
 - Drum kit capable of MIDI note output (electric drumkit or acoustic with triggers)
 - (Optional) [Aluminium LED channel](https://www.amazon.co.uk/Chesbung-Aluminum-Channels-Diffusers-Mounting/dp/B07RJVV9MY?pd_rd_w=TNSWg&pf_rd_p=508c5101-ccd9-46e7-b139-f5fa5b359865&pf_rd_r=BYKFHRAD8NJNQ7T5TBR3&pd_rd_r=4dde0c46-0170-4a38-af65-c321c9e4feb1&pd_rd_wg=nqF4R&psc=1&ref_=pd_bap_d_csi_vtp_0_t) for mounting to stands.
@@ -91,3 +91,4 @@ better secure line connections.
 
 
 ### Server Start
+Built by Stephen Colfer
