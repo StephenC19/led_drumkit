@@ -1,0 +1,72 @@
+{
+    "36": {
+        "led_index": [
+            298,
+            598
+        ],
+        "drum_type": "kick"
+    },
+    "38": {
+        "led_index": [
+            0,
+            55
+        ],
+        "drum_type": "snare"
+    },
+    "48": {
+        "led_index": [
+            55,
+            87
+        ],
+        "drum_type": "tom1"
+    },
+    "45": {
+        "led_index": [
+            87,
+            120
+        ],
+        "drum_type": "tom2"
+    },
+    "43": {
+        "led_index": [
+            120,
+            153
+        ],
+        "drum_type": "tom3"
+    },
+    "26": {
+        "led_index": [
+            153,
+            207
+        ],
+        "drum_type": "tom4"
+    },
+    "27": {
+        "led_index": [
+            273,
+            297
+        ],
+        "drum_type": "hihat"
+    },
+    "49": {
+        "led_index": [
+            251,
+            273
+        ],
+        "drum_type": "crash1"
+    },
+    "52": {
+        "led_index": [
+            229,
+            251
+        ],
+        "drum_type": "crash2"
+    },
+    "53": {
+        "led_index": [
+            207,
+            229
+        ],
+        "drum_type": "ride"
+    }
+}

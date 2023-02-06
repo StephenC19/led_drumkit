@@ -1,3 +1,6 @@
+from lib.ledStrip import *
+import time
+
 pixel_map = {
     1:[496, 497, 498, 499, 500],
     2:[493, 494, 495, 501, 502, 503, 504],
