@@ -1,4 +1,3 @@
-import mido
 import time
 import multiprocessing
 from utils.utils import *
@@ -7,15 +6,12 @@ from config.config import *
 from lib.ledStripDaemon import *
 
 def listen_to_midi_notes():
-    start_timer = True
-    count = 0
-    while start_timer:
+    time_counter = 0
+    while time_counter < 600:
         if read_json_file("active_control_file.json")["app_state"] == "start":
             break
         time.sleep(0.5)
-        count += 1
-        if count > 600:
-            start_timer = False
+        time_counter += 1
 
     midi_connection = setup_custom_midi_connection(MIDI_UNIT)
 
@@ -43,8 +39,6 @@ if __name__ == "__main__":
 
 
 #TODO
-#remove animation once started
-# - follow from main
-# - remove start thing
+# - remove animation once started
 # - add startup options in UI
 # - build setup script
