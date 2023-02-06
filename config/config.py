@@ -2,7 +2,7 @@ import json
 
 MIDI_UNIT = 'TD-17:TD-17 MIDI 1 20:0'
 
-DRUMKIT_NAME = 'roland_td17_config'
+DRUMKIT_NAME = 'config/roland_td17_config.json' #TODO
 
 with open(DRUMKIT_NAME) as json_file:
     DRUMKIT_CONFIG = json.load(json_file)

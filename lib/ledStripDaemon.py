@@ -5,15 +5,14 @@ from config.pixelMap import *
 from animations.hitAnimations import *
 
 def getStripSegmentIndex(note):
-    start = DRUMKIT_CONFIG[note]["led_index"][0]
-    end = DRUMKIT_CONFIG[note]["led_index"][1]
+    start = DRUMKIT_CONFIG[str(note)]["led_index"][0]
+    end = DRUMKIT_CONFIG[str(note)]["led_index"][1]
     return start, end
 
 def initStripValues(led_count):
     current_strip_values = {}
     for i in range(LED_COUNT):
         current_strip_values[i] = [0,0,0]
-
     return current_strip_values
 
 def runStartupAnimation(led_strip):
@@ -66,14 +65,10 @@ def ledStripDaemon(midi_note_queue):
                 runAnimation(led_strip, midi_hit["animation_type"])
                 continue
 
-            if midi_hit["type"] == "accent":
-                start,end = 0, LED_COUNT
-                hit_color = colours["accent_hit_1"]
-            else:
-                start, end = getStripSegmentIndex(midi_hit["note"])
+            start, end = getStripSegmentIndex(midi_hit["note"])
 
             # Get colour
-            drum_type = DRUMKIT_CONFIG[midi_hit["note"]["drum_type"]]
+            drum_type = DRUMKIT_CONFIG[str(midi_hit["note"])]["drum_type"]
             hit_color = colours[drum_type]
 
             # Modify Brightness
@@ -86,18 +81,14 @@ def ledStripDaemon(midi_note_queue):
 
             # Set strip colour
             for i in range(len(current_strip_values)):
-                r = current_strip_values[i][0]
-                g = current_strip_values[i][1]
-                b = current_strip_values[i][2]
+                r, g, b = current_strip_values[i]
                 color = [g, r, b]
                 led_strip.setPixel(i, color)
                 current_strip_values[i] = linearFade(r, g, b)
             led_strip.stripShow()
         except:
             for i in range(len(current_strip_values)):
-                r = current_strip_values[i][0]
-                g = current_strip_values[i][1]
-                b = current_strip_values[i][2]
+                r, g, b = current_strip_values[i]
                 color = [g, r, b]
                 led_strip.setPixel(i, color)
                 current_strip_values[i] = linearFade(r, g, b)

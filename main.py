@@ -7,10 +7,16 @@ from config.config import *
 from lib.ledStripDaemon import *
 
 def listen_to_midi_notes():
-    while True:
-        if read_json_file("../active_control_file.json")["app_state"] == "start":
+    start_timer = True
+    count = 0
+    while start_timer:
+        if read_json_file("active_control_file.json")["app_state"] == "start":
             break
         time.sleep(0.5)
+        count += 1
+        if count > 600:
+            start_timer = False
+
     midi_connection = setup_custom_midi_connection(MIDI_UNIT)
 
     # Start LED control daemon with animation
@@ -22,7 +28,7 @@ def listen_to_midi_notes():
     # Listen for midi messages
     for msg in midi_connection:
         if msg.type == "note_on":
-            control_file = read_json_file("../active_control_file.json")
+            control_file = read_json_file("active_control_file.json")
             if control_file["animation"]:
                 led_strip_message_queue.put({"animation":True, "animaton_type": control_file["animation_type"]})
                 continue
@@ -37,6 +43,7 @@ if __name__ == "__main__":
 
 
 #TODO
+#remove animation once started
 # - follow from main
 # - remove start thing
 # - add startup options in UI

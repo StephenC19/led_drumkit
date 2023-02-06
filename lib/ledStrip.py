@@ -1,5 +1,3 @@
-from neopixel import *
-from datetime import datetime
 import time
 import random
 import argparse
@@ -9,6 +7,8 @@ import json
 import os
 from utils import *
 from config import *
+from datetime import datetime
+from rpi_ws281x import *
 
 class LedStrip:
 
