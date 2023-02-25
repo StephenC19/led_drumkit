@@ -54,5 +54,46 @@ def add_animation():
     write_json_file(COLOUR_CONFIG_PATH, data)
     return "Rainbow animation"
 
+@app.route('/run_led_kit')
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def run_led_kit():
+    multiprocessing.Process(target=listen_to_midi_notes, args=()).start()
+    return "Started led kit run"
+
+@app.route('/midi_connections')
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def midi_connections():
+    return get_midi_connections()
+
+@app.route('/turn_on_drum')
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def turn_on_drum():
+    turn_on_single_drum(request.args.get('drum_name'))
+    return get_midi_connections()
+
+@app.route('/add_new_config')
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def midi_connections():
+    config_name = request.args.get('config_name')
+    if (valid_config_request(config_name)):
+        write_json_file(config_name)
+
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    if(len(sys.argv) > 0 and sys.argv[0] == "server_mode"):
+        app.run(host='0.0.0.0')
+    else:
+        print("Running as standalone script with current config.\n To run in server mode run with 'server_mode'")
+        listen_to_midi_notes()
+
+
+
+#TODO
+# - add feature of ambient strip sections
+# - Design main page
+# - create new config
+# - edit config by lighting individual drums
+
+# - remove animation once started
+# - add startup options in UI
+# - build setup script

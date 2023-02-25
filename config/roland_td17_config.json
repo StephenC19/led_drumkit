@@ -1,72 +1,90 @@
 {
+    "27": {
+        "led_index": 5,
+        "drum_type": "tom4",
+        "colour_group": "toms"
+    },
     "36": {
-        "led_index": [
-            298,
-            598
-        ],
-        "drum_type": "kick"
+        "led_index": 0,
+        "drum_type": "kick",
+        "colour_group": "kick"
     },
     "38": {
-        "led_index": [
-            0,
-            55
-        ],
-        "drum_type": "snare"
-    },
-    "48": {
-        "led_index": [
-            55,
-            87
-        ],
-        "drum_type": "tom1"
-    },
-    "45": {
-        "led_index": [
-            87,
-            120
-        ],
-        "drum_type": "tom2"
+        "led_index": 1,
+        "drum_type": "snare",
+        "colour_group": "snare"
     },
     "43": {
-        "led_index": [
-            120,
-            153
-        ],
-        "drum_type": "tom3"
+        "led_index": 4,
+        "drum_type": "tom3",
+        "colour_group": "toms"
     },
-    "26": {
-        "led_index": [
-            153,
-            207
-        ],
-        "drum_type": "tom4"
+    "45": {
+        "led_index": 3,
+        "drum_type": "tom2",
+        "colour_group": "toms"
     },
-    "27": {
-        "led_index": [
-            273,
-            297
-        ],
-        "drum_type": "hihat"
+    "46": {
+        "led_index": 9,
+        "drum_type": "hihat",
+        "colour_group": "cymbals"
+    },
+    "48": {
+        "led_index": 2,
+        "drum_type": "tom1",
+        "colour_group": "toms"
     },
     "49": {
-        "led_index": [
-            251,
-            273
-        ],
-        "drum_type": "crash1"
+        "led_index": 8,
+        "drum_type": "crash1",
+        "colour_group": "cymbals"
     },
-    "52": {
-        "led_index": [
-            229,
-            251
-        ],
-        "drum_type": "crash2"
+    "51": {
+        "led_index": 6,
+        "drum_type": "ride",
+        "colour_group": "cymbals"
     },
-    "53": {
-        "led_index": [
-            207,
-            229
+    "57": {
+        "led_index": 7,
+        "drum_type": "crash2",
+        "colour_group": "cymbals"
+    },
+    "led_segment_indexes": [
+        [
+            0,
+            300
         ],
-        "drum_type": "ride"
-    }
+        [
+            300,
+            352
+        ],
+        [
+            352,
+            383
+        ],
+        [
+            383,
+            416
+        ],
+        [
+            416,
+            449
+        ],
+        [
+            449,
+            503
+        ],
+        [
+            503,
+            525
+        ],
+        [
+            525,
+            547
+        ],
+        [
+            569,
+            594
+        ]
+    ]
 }

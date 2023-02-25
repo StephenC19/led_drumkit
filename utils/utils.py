@@ -1,3 +1,4 @@
+import os
 import json
 
 def hex_rgb_converter(hex_value):
@@ -27,3 +28,6 @@ def write_json_file(file, data):
 def read_file(file):
     with open(file) as json_file:
         return json_file
+
+def valid_config_request(drum_config_name):
+    return not os.path.exists(drum_config_name)

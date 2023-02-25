@@ -20,3 +20,6 @@ def setup_custom_midi_connection(midi_device):
 
     print("No MIDI device found. Please make sure a device is connected.")
     exit(1)
+
+def get_midi_connections():
+    return mido.get_input_names()

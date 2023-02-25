@@ -4,16 +4,15 @@ from config.config import *
 from config.pixelMap import *
 from animations.hitAnimations import *
 
-def getStripSegmentIndex(note):
-    start = DRUMKIT_CONFIG[str(note)]["led_index"][0]
-    end = DRUMKIT_CONFIG[str(note)]["led_index"][1]
-    return start, end
-
 def initStripValues(led_count):
     current_strip_values = {}
     for i in range(LED_COUNT):
         current_strip_values[i] = [0,0,0]
     return current_strip_values
+
+def light_ambient_segments(led_strip):
+    for drum in DRUMKIT_CONFIG:
+
 
 def runStartupAnimation(led_strip):
     # Horizontal wipe center to sides
@@ -55,7 +54,10 @@ def runAnimation(led_strip, animation_type):
 def ledStripDaemon(midi_note_queue):
     led_strip = LedStrip(LED_COUNT, STRIP_GPIO_PIN)
     current_strip_values = initStripValues(LED_COUNT)
+    strip_indexes = DRUMKIT_CONFIG["led_segment_indexes"]
     colours = read_json_file('config/accentColours.json')
+
+    light_ambient_segments(led_strip)
 
     while True:
         try:
@@ -65,11 +67,13 @@ def ledStripDaemon(midi_note_queue):
                 runAnimation(led_strip, midi_hit["animation_type"])
                 continue
 
-            start, end = getStripSegmentIndex(midi_hit["note"])
+            drum_config = DRUMKIT_CONFIG[str(midi_hit["note"])]
+
+            # Get LED pixel index
+            start, end = strip_indexes[drum_config["led_index"]]
 
             # Get colour
-            drum_type = DRUMKIT_CONFIG[str(midi_hit["note"])]["drum_type"]
-            hit_color = colours[drum_type]
+            hit_color = colours[drum_config["colour_group"]]
 
             # Modify Brightness
             multiplier = midi_hit["velocity"] * ((100/127)) * 0.01

@@ -1,3 +1,4 @@
+import sys
 import time
 import multiprocessing
 from utils.utils import *
@@ -36,9 +37,3 @@ def listen_to_midi_notes():
 
 if __name__ == "__main__":
     listen_to_midi_notes()
-
-
-#TODO
-# - remove animation once started
-# - add startup options in UI
-# - build setup script
